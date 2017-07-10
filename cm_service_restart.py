@@ -9,15 +9,15 @@ from cm_api.api_client import ApiResource
 
 parser = argparse.ArgumentParser(description='Restart a CM cluster service')
 
-parser.add_argument('--cm_host', required=True,
+parser.add_argument('-m', '--cm_host', required=True,
                     help="hostname / fqdn of the CM UI ('cloudera.domain.com')")
-parser.add_argument('--username', default=os.environ['USER'],
+parser.add_argument('-u', '--username', default=os.environ['USER'],
                     help="username for the CM API authentication ('johndoe')")
-parser.add_argument('--password', required=True,
+parser.add_argument('-p', '--password', required=True,
                     help="password for the CM API authentication ('Pa55w0rd')")
-parser.add_argument('--cluster', required=False,
+parser.add_argument('-l', '--cluster', required=False,
                     help="cluster to restart service in ('mycluster')")
-parser.add_argument('--service', required=False,
+parser.add_argument('-s', '--service', required=False,
                     help="service to restart ('hdfs')")
 
 args = parser.parse_args()
@@ -60,6 +60,7 @@ for cluster in clusters:
             if service.name.lower() == service_name:
 
                 # Restart the service
-                command = service.restart().wait()
-                print command
+                print "Attempting to restart '%s' in '%s'" % (service_name, cluster_name)
+                # command = service.restart().wait()
+                # print command
                 sys.exit()
