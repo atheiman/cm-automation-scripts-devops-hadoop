@@ -61,6 +61,6 @@ for cluster in clusters:
 
                 # Restart the service
                 print "Attempting to restart '%s' in '%s'" % (service_name, cluster_name)
-                # command = service.restart().wait()
-                # print command
+                command = service.restart().wait()
+                print command
                 sys.exit()
